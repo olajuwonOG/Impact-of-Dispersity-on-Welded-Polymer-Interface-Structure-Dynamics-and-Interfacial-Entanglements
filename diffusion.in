@@ -1,0 +1,85 @@
+############## Melt N = 360 combine Film#################
+
+units       lj
+
+atom_style  full
+
+#bond_style	fene
+#pair_style 	lj/cut 2.5
+#angle_style	cosine
+
+
+#read_data 		1.0_robbins.lmps
+
+read_restart  	imers.restart.41943040 #imers.restart.33554432 #33554432 #25165824 #17825792
+
+change_box all boundary    p p f #remap units box
+
+bond_style	fene
+pair_style 	lj/cut 2.5
+angle_style	cosine
+
+bond_style  fene
+
+bond_coeff  1 30.0 1.5 1.0 1.0
+#bond_coeff  2 30.0 1.5 1.0 1.0
+
+special_bonds   fene
+
+angle_coeff	1 1.5
+
+neighbor    0.3 bin 
+neigh_modify every 1 delay 0 check yes
+
+
+fix 	 fixwallshigh all wall/lj126 zhi EDGE 1.0 1.0 1.1226 	 #pbc yes
+fix 	 fixwallslow all wall/lj126 zlo EDGE 1.0 1.0 1.1226    #pbc yes 
+
+
+timestep    0.01
+
+thermo      1000
+
+thermo_style    custom step temp press ke pe ebond eimp evdwl ecoul elong lx ly lz 
+
+#minimize 1.0e-7 1.0e-7 10000000 10000000
+
+variable	name string "lastStep"
+
+#################Equilibration##################
+
+#pair_style  lj/cut 2.5
+
+pair_modify shift yes
+
+
+pair_coeff   1 1 1.0 1.0 2.5 
+pair_coeff   2 2 1.0 1.0 2.5 
+pair_coeff   1 2 1.0 1.0 2.5
+
+fix     fix1 all npt temp 1.0 1.0 0.1 x 0.0 0.0 0.1 #all nvt temp 1.25 1.25 1.0
+
+
+#production/adhesion
+
+reset_timestep	41943040 #33554432 #33554432 #25165824 #17825792
+
+variable f file python.txt
+
+variable s equal next(f)
+
+dump        dump3 all custom 50000 production.dump id mol type q xs ys zs ix iy iz
+
+dump_modify dump3 sort id #sort per-atom lines by atom ID
+
+dump_modify dump3 every v_s
+
+dump_modify dump3 append yes
+
+restart 1048576 imers.restart
+
+run             500000000
+
+write_restart restart.${name}
+
+write_data final_traj.lmps
