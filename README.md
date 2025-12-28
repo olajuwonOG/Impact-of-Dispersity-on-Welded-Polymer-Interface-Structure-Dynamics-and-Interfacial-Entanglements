@@ -2,7 +2,7 @@
 Lammps Input script and analysis script for impact of chain length dispersity on adhesion dynamics
 
 
-density_profile.py – Python code to calculate density profile for single film
+◦ density_profile.py – Python code to calculate density profile for single film
 
 ◦ bacf.py – Python script to calculate the bond vector autocorrelation at the free surface and center of the single film
 
