@@ -12,6 +12,7 @@ Lammps Input script and analysis script for impact of chain length dispersity on
 
 ◦ concentration_profile_two_films.py – calculates the concentration profile for the interdiffusing chains
 
+◦ areal_density.py – calculates the areal density of topological constraints (TCs), density of TCs for interface and bulk when welded
 
 
 *** We use the Z1+ code to calculate entanglement properties (interface and bulk) - https://www.sciencedirect.com/science/article/pii/S0010465522002867
