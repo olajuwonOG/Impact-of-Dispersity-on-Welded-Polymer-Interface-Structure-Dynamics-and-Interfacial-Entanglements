@@ -14,6 +14,7 @@ Lammps Input script and analysis script for impact of chain length dispersity on
 
 ◦ areal_density.py – calculates the areal density of topological constraints (TCs), density of TCs for interface and bulk when welded
 
+◦ mkinput.py and mkinput_disperse.py – codes for creating initial configuration of single film for monodisperse and disperse case
 
 *** We use the Z1+ code to calculate entanglement properties (interface and bulk) - https://www.sciencedirect.com/science/article/pii/S0010465522002867
 
