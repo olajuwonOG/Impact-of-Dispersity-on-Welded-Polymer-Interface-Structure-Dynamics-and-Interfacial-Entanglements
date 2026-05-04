@@ -20,3 +20,4 @@ Lammps Input script and analysis script for impact of chain length dispersity on
 
 
 
+paper: https://pubs.aip.org/aip/jcp/article/164/14/144909/3386762/Impact-of-dispersity-on-the-welding-of-polymer
